@@ -2062,7 +2062,7 @@ In an EC2 instance a IAM role can be used to give access to S3/SNS/SQS resources
     if sys.platform == "darwin":
         volume_name = os.path.basename(mountpoint)
         fuse = FUSE(YAS3FS(options), mountpoint, fsname="yas3fs",
-                    foreground=options.foreground,
+                    foreground=options.foreground, umask=000,
                     default_permissions=True, allow_other=True,
                     auto_cache=True, atime=False,
                     max_read=131072, max_write=131072, max_readahead=131072,
@@ -2071,7 +2071,7 @@ In an EC2 instance a IAM role can be used to give access to S3/SNS/SQS resources
                     # local=True) # local option is quite unstable
     else:
         fuse = FUSE(YAS3FS(options), mountpoint, fsname="yas3fs",
-                    foreground=options.foreground,
+                    foreground=options.foreground, umask=000,
                     default_permissions=True, allow_other=True,
                     auto_cache=True, atime=False,
                     big_writes=True, # Not working on OS X
